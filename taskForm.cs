@@ -19,17 +19,17 @@ using proxy;
 
 namespace uhf_test2
 {
-    public partial class taskForm : Form
+    public partial class TaskForm : Form
     {
         #region 任务变量
 
         JsonGen gen = new JsonGen(new char[3000], 3000);
-
+        string taskID = null;
         #endregion
 
         #region Form相关
 
-        public taskForm()
+        public TaskForm()
         {
             InitializeComponent();
         }
@@ -110,7 +110,7 @@ namespace uhf_test2
                 showList(epc, false);
             }
             //上传数据
-            if (false == this.uploadRfidData(genRfidsJson(gen, "12345678", list)))
+            if (false == this.uploadRfidData(genRfidsJson(gen, this.taskID, list)))
             {
                 this.btnStop_Click(sender, e);
                 return;
@@ -288,6 +288,17 @@ namespace uhf_test2
         }
 
         #endregion
+
+        private void taskFinish_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        public void taskShow(string taskID)
+        {
+            this.taskID = taskID;
+            this.Show();
+        }
 
     }
 }

@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using System.Net;
 using RFID.UHF;
 using proxy;
+using Rfid_client_vCE;
 //using LitJson;
 
 namespace uhf_test2
@@ -66,7 +67,16 @@ namespace uhf_test2
                 //返回对话框结果
                 DialogResult = DialogResult.OK;
                 string str = "123,456,789,12,45,32,121212,121,21,21";
-                Program.taskList = str.Split(str);
+                string[] strTmp = str.Split(',');
+                for (int i = 0; i < strTmp.Length; i++)
+                {
+                    Employee.taskList.Add(strTmp[i]);
+                }
+                Employee.username = textUsername.Text;
+                Employee.userpasswd = textPassword.Text;
+
+                //new TaskList().ShowDialog();
+
                 //返回
                 this.Close();
             }

@@ -1,6 +1,6 @@
 ﻿namespace uhf_test2
 {
-    partial class taskForm
+    partial class TaskForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -100,8 +100,9 @@
             this.taskFinish.Size = new System.Drawing.Size(72, 20);
             this.taskFinish.TabIndex = 9;
             this.taskFinish.Text = "清点完成";
+            this.taskFinish.Click += new System.EventHandler(this.taskFinish_Click);
             // 
-            // taskForm
+            // TaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -112,7 +113,7 @@
             this.Controls.Add(this.btnOnce);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.btnStop);
-            this.Name = "taskForm";
+            this.Name = "TaskForm";
             this.Text = "盘点界面";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Closed += new System.EventHandler(this.Form1_Closed);

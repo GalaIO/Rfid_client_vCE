@@ -1,12 +1,11 @@
 ﻿namespace Rfid_client_vCE
 {
-    partial class taskList
+    partial class TaskList
     {
         /// <summary>
         /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// 清理所有正在使用的资源。
@@ -29,26 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.taskListView = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // taskListView
             // 
+            this.taskListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.taskListView.FullRowSelect = true;
             this.taskListView.Location = new System.Drawing.Point(13, 10);
             this.taskListView.Name = "taskListView";
             this.taskListView.Size = new System.Drawing.Size(185, 144);
             this.taskListView.TabIndex = 0;
+            this.taskListView.View = System.Windows.Forms.View.Details;
+            this.taskListView.ItemActivate += new System.EventHandler(this.taskListView_ItemActivate);
+            this.taskListView.SelectedIndexChanged += new System.EventHandler(this.taskListView_SelectedIndexChanged);
             // 
-            // taskList
+            // TaskList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(217, 157);
             this.Controls.Add(this.taskListView);
-            this.Menu = this.mainMenu1;
-            this.Name = "taskList";
+            this.Name = "TaskList";
             this.Text = "任务列表";
             this.Load += new System.EventHandler(this.taskList_Load);
             this.ResumeLayout(false);
@@ -58,5 +60,6 @@
         #endregion
 
         private System.Windows.Forms.ListView taskListView;
+
     }
 }

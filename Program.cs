@@ -8,12 +8,12 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Rfid_client_vCE;
 
 namespace uhf_test2
 {
     static class Program
     {
-        public static string[] taskList = null; 
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
@@ -22,9 +22,13 @@ namespace uhf_test2
         {
             Login login = new Login();
             login.ShowDialog();
+            /*TaskList taskList = new TaskList();
+            taskList.ShowDialog();
+            TaskForm taskForm = new TaskForm();
+            taskForm.ShowDialog();*/
             if (login.DialogResult == DialogResult.OK)
             {
-                Application.Run(new taskForm());
+                Application.Run(new TaskList());
             }
         }
     }
