@@ -91,7 +91,7 @@ namespace uhf_test2
                 MessageBox.Show("开始寻标签失败！");
                 return;
             }
-            cTimer.Interval = 80;//设置时钟间隔时间，根据实际情况调整大小
+            cTimer.Interval = 1000;//设置时钟间隔时间，根据实际情况调整大小
             cTimer.Enabled = true;
         }
 
@@ -249,13 +249,13 @@ namespace uhf_test2
                 reqStream.Write(buffer, 0, buffer.Length);
                 reqStream.Close();
 
-                HttpWebResponse rsp = (HttpWebResponse)req.GetResponse();
+                /*HttpWebResponse rsp = (HttpWebResponse)req.GetResponse();
                 Stream rspStream = rsp.GetResponseStream();
                 StreamReader reader = new StreamReader(rspStream, Encoding.Default);
                 //响应消息直接抛弃
                 reader.ReadToEnd();
                 rsp.Close();
-                rspStream.Close();
+                rspStream.Close();*/
             }
             catch (Exception e)
             {

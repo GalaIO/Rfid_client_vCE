@@ -29,11 +29,6 @@ namespace uhf_test2
 
         private void login_Load(object sender, EventArgs e)
         {
-            List<string> l = new List<string>();
-            l.Add("aaa");
-            l.Add("aaa");
-            l.Add("aaa");
-            //MessageBox.Show(JsonMapper.ToJson(l));
         }
 
         private void login_btn_Click(object sender, EventArgs e)
@@ -43,17 +38,42 @@ namespace uhf_test2
                 MessageBox.Show("用户名和密码不正确！！");
                 return;
             }
-            string result = uploadLoginData(textUsername.Text, textPassword.Text);
+            /*string result = uploadLoginData(textUsername.Text, textPassword.Text);
             if (result == "ERROR:1")
             {
                 MessageBox.Show("网络错误，尝试重新登录！");
                 return;
             }
-            MessageBox.Show(result);
-            //返回对话框结果
-            DialogResult = DialogResult.OK;
-            //返回
-            this.Close();
+            //MessageBox.Show(result);
+            string infoLogin = JsonParser.find(result, "message");
+            MessageBox.Show(infoLogin);
+            if (int.Parse(JsonParser.find(result, "err_code")) == 0)
+            {
+                MessageBox.Show("登录成功");
+                //返回对话框结果
+                DialogResult = DialogResult.OK;
+                //string list = JsonParser.find(result, "");
+                //返回
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("登录失败请重新登录");
+            }*/
+            if (textPassword.Text == "123")
+            {
+                MessageBox.Show("登录成功");
+                //返回对话框结果
+                DialogResult = DialogResult.OK;
+                string str = "123,456,789,12,45,32,121212,121,21,21";
+                Program.taskList = str.Split(str);
+                //返回
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("登录失败");
+            }
         }
         //上传某数据
         private string uploadLoginData(string username, string password)

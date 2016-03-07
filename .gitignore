@@ -45,3 +45,13 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.dll
+bin/Debug/Rfid_client_vCE.exe
+*.pdb
+bin/Debug/Rfid_client_vCE.exe
+*.cache
+obj/Debug/Rfid_client_vCE.csproj.FileListAbsolute.txt
+*.Cache
+*.resources
+Rfid_client_vCE.sln
+*.suo

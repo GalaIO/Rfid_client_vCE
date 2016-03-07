@@ -13,6 +13,7 @@ namespace uhf_test2
 {
     static class Program
     {
+        public static string[] taskList = null; 
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>

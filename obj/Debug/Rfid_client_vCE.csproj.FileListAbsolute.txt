@@ -18,3 +18,14 @@ C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\Rfid_client_vCE\obj\Debug\Rfid_c
 C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\Rfid_client_vCE\obj\Debug\Rfid_client_vCE.csproj.GenerateResource.Cache
 C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\Rfid_client_vCE\obj\Debug\Rfid_client_vCE.exe
 C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\Rfid_client_vCE\obj\Debug\Rfid_client_vCE.pdb
+C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\bin\Debug\Rfid_client_vCE.exe
+C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\bin\Debug\Rfid_client_vCE.pdb
+C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\bin\Debug\RFID.UHF.dll
+C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\obj\Debug\uhf_test2.taskForm.resources
+C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\obj\Debug\uhf_test2.Login.resources
+C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\obj\Debug\Rfid_client_vCE.Properties.Resources.resources
+C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\obj\Debug\Rfid_client_vCE.csproj.GenerateResource.Cache
+C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\obj\Debug\Rfid_client_vCE.exe
+C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\obj\Debug\Rfid_client_vCE.pdb
+C:\Users\yingjie\Desktop\GalaIO\Rfid_client_vCE\obj\Debug\Rfid_client_vCE.taskList.resources

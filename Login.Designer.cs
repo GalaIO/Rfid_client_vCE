@@ -62,6 +62,7 @@
             // 
             this.textPassword.Location = new System.Drawing.Point(81, 78);
             this.textPassword.Name = "textPassword";
+            this.textPassword.PasswordChar = '*';
             this.textPassword.Size = new System.Drawing.Size(99, 23);
             this.textPassword.TabIndex = 5;
             // 
@@ -77,7 +78,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(216, 209);
+            this.ClientSize = new System.Drawing.Size(212, 193);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.loginButton);
