@@ -23,15 +23,17 @@ namespace uhf_test2
     {
         #region 任务变量
 
-        JsonGen gen = new JsonGen(new char[3000], 3000);
-        string taskID = null;
+        private JsonGen gen = new JsonGen(new char[3000], 3000);
+        private string taskID = null;
+        private Form parent;
         #endregion
 
         #region Form相关
 
-        public TaskForm()
+        public TaskForm(Form parent)
         {
             InitializeComponent();
+            this.parent = parent;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -292,10 +294,14 @@ namespace uhf_test2
         private void taskFinish_Click(object sender, EventArgs e)
         {
             this.Hide();
+            //显示父窗口
+            this.parent.Show();
         }
 
         public void taskShow(string taskID)
         {
+            //隐藏父窗口
+            this.parent.Hide();
             this.taskID = taskID;
             this.Show();
         }

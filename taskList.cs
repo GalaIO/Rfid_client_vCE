@@ -22,7 +22,7 @@ namespace Rfid_client_vCE
         {
             taskListViewReload();
             //启动新的任务
-            taskForm = new TaskForm();
+            taskForm = new TaskForm(this);
             //并隐藏
             taskForm.Hide();
         }

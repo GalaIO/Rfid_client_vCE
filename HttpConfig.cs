@@ -23,9 +23,9 @@ namespace proxy
         private HttpConfig()
         {
 
-            host = "http://192.168.0.102:8080";
+            //host = "http://192.168.0.102:8080";
             //host = "http://rfid.jackon.me:80";
-            //host = "http://123.57.80.232:8000";
+            host = "http://123.57.80.232:8000";
 
             url_login = host + "/api/auth";
             url_shop_in = host + "/products/shopin/";
