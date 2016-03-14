@@ -17,7 +17,6 @@ using System.Net;
 using RFID.UHF;
 using proxy;
 using Rfid_client_vCE;
-//using LitJson;
 
 namespace uhf_test2
 {
@@ -26,64 +25,43 @@ namespace uhf_test2
         public Login()
         {
             InitializeComponent();
-        }
-
-        private void login_Load(object sender, EventArgs e)
-        {
+            //窗口最大化
+            Util.maxForm2Screen(this);
         }
 
         private void login_btn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textUsername.Text) || string.IsNullOrEmpty(textPassword.Text))
             {
-                MessageBox.Show("用户名和密码不正确！！");
+                MessageBox.Show("请输入用户名和密码！！");
                 return;
             }
-            /*string result = uploadLoginData(textUsername.Text, textPassword.Text);
+            //存储 员工信息
+            Employee.username = textUsername.Text;
+            Employee.userpasswd = textPassword.Text;
+            string result = uploadLoginData(textUsername.Text, textPassword.Text);
             if (result == "ERROR:1")
             {
                 MessageBox.Show("网络错误，尝试重新登录！");
                 return;
             }
-            //MessageBox.Show(result);
-            string infoLogin = JsonParser.find(result, "message");
-            MessageBox.Show(infoLogin);
-            if (int.Parse(JsonParser.find(result, "err_code")) == 0)
+            string taskListInfo = JsonParser.findNextArray(result, null, 0);
+            if (taskListInfo == null)
             {
-                MessageBox.Show("登录成功");
-                //返回对话框结果
-                DialogResult = DialogResult.OK;
-                //string list = JsonParser.find(result, "");
-                //返回
-                this.Close();
+                MessageBox.Show(result);
+                return;
             }
-            else
+            MessageBox.Show("登录成功");
+            int off = 0;
+            for (string tmp = JsonParser.findNextObj(taskListInfo, null, off); tmp != null; )
             {
-                MessageBox.Show("登录失败请重新登录");
-            }*/
-            if (textPassword.Text == "123")
-            {
-                MessageBox.Show("登录成功");
-                //返回对话框结果
-                DialogResult = DialogResult.OK;
-                string str = "123,456,789,12,45,32,121212,121,21,21";
-                string[] strTmp = str.Split(',');
-                for (int i = 0; i < strTmp.Length; i++)
-                {
-                    Employee.taskList.Add(strTmp[i]);
-                }
-                Employee.username = textUsername.Text;
-                Employee.userpasswd = textPassword.Text;
-
-                //new TaskList().ShowDialog();
-
-                //返回
-                this.Close();
+                off += tmp.Length;
+                Employee.taskList.Add(tmp);
+                tmp = JsonParser.findNextObj(taskListInfo, null, off);
             }
-            else
-            {
-                MessageBox.Show("登录失败");
-            }
+            //返回对话框结果
+            DialogResult = DialogResult.OK;
+            this.Close();
         }
         //上传某数据
         private string uploadLoginData(string username, string password)
@@ -92,27 +70,20 @@ namespace uhf_test2
             HttpWebRequest req = null;
             try
             {
-                req = (HttpWebRequest)WebRequest.Create(HttpConfig.Instance.UrlLogin);
-                string data = string.Format("username={0}&password={1}&shop_key={2}", username, password, 4);
-                byte[] buffer = Encoding.UTF8.GetBytes(data);
+                string data = string.Format("username={0}&password={1}", username, password);
+                req = (HttpWebRequest)WebRequest.Create(HttpConfig.Instance.UrlLogin+"?"+data);
 
-                req.Method = "post";
-                req.ContentType = "application/x-www-form-urlencoded";
-                req.ContentLength = buffer.Length;
-                Stream reqStream = req.GetRequestStream();
-                reqStream.Write(buffer, 0, buffer.Length);
-                reqStream.Close();
-
+                req.Method = "get";
                 HttpWebResponse rsp = (HttpWebResponse)req.GetResponse();
                 Stream rspStream = rsp.GetResponseStream();
-                StreamReader reader = new StreamReader(rspStream, Encoding.Default);
+                StreamReader reader = new StreamReader(rspStream, Encoding.GetEncoding("utf-8"));
                 tmp = reader.ReadToEnd();
                 rspStream.Close();
                 rsp.Close();
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message+e.StackTrace);
+                //MessageBox.Show(e.Message+e.StackTrace);
                 tmp = "ERROR:1";
             }
 

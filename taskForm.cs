@@ -17,7 +17,7 @@ using System.Net;
 using RFID.UHF;
 using proxy;
 
-namespace uhf_test2
+namespace Rfid_client_vCE
 {
     public partial class TaskForm : Form
     {
@@ -25,6 +25,7 @@ namespace uhf_test2
 
         private JsonGen gen = new JsonGen(new char[3000], 3000);
         private string taskID = null;
+        private bool isFinish = false;
         private Form parent;
         #endregion
 
@@ -33,6 +34,8 @@ namespace uhf_test2
         public TaskForm(Form parent)
         {
             InitializeComponent();
+            //窗口最大化
+            Util.maxForm2Screen(this);
             this.parent = parent;
         }
 
@@ -43,17 +46,15 @@ namespace uhf_test2
                 Uhf.MessageBeep(SoundType.MB_ICONERROR);//发出声音
                 //发出警告
                 MessageBox.Show("打开设备失败!请检查硬件！");
-                //退出应用
-                //Application.Exit();
-                return;
+                taskHide(false);
             }
 
             //初始化组件
             btnStop.Enabled = false;
-
+            /*
             //获取功率与协议
             this.getPower();
-            this.getProtocol();
+            this.getProtocol();*/
         }
 
         private void Form1_Closed(object sender, EventArgs e)
@@ -65,21 +66,6 @@ namespace uhf_test2
         #endregion
 
         #region 标签扫描
-        private void btnOnce_Click(object sender, EventArgs e)
-        {
-            EPC epc = new EPC();
-            //单次寻标签，并把寻到的标签内容放入epc中
-            if (Uhf.RfidInventoryOnce(ref epc, 100) == 0)
-            {
-                Uhf.MessageBeep(SoundType.MB_ICONERROR);//发出声音
-                MessageBox.Show("单次寻标签失败！");
-                return;
-            }
-            //添加epc码
-            //addLogText(epc.id + epc.count.ToString() + epc.rssi.ToString() + "123");
-            showList(epc, true);
-            this.uploadRfidData(epc.id);
-        }
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
@@ -112,8 +98,10 @@ namespace uhf_test2
                 showList(epc, false);
             }
             //上传数据
-            if (false == this.uploadRfidData(genRfidsJson(gen, this.taskID, list)))
+            string reqTmp = genRfidsJson(gen, this.taskID, list);
+            if (false == this.uploadRfidData(this.taskID, reqTmp))
             {
+                MessageBox.Show("网络错误！");
                 this.btnStop_Click(sender, e);
                 return;
             }
@@ -147,7 +135,7 @@ namespace uhf_test2
             int count = pepc.count;
             if (id.Length > 4)
             {
-                id = id.Insert(4, " ");//为了区分前4位，加入空格
+                id = id.Substring(4, id.Length-4);//为了区分前4位，加入空格
             }
 
             ListViewItem item = getListViewItem(id);//查看该卡ID信息是否存在，不存在返回null
@@ -235,33 +223,34 @@ namespace uhf_test2
         }
 
         //上传某数据
-        private bool uploadRfidData(string data)
+        private bool uploadRfidData(string pk, string data)
         {
             bool tmp = true;
             HttpWebRequest req = null;
             try
             {
-                req = (HttpWebRequest)WebRequest.Create(HttpConfig.Instance.UrlReportRfid);
+                req = (HttpWebRequest)WebRequest.Create(HttpConfig.Instance.Host + "/inventory/" + pk + "/scan");
                 byte[] buffer = Encoding.UTF8.GetBytes(data);
-
+                int senLen = buffer.Length-1;
                 req.Method = "post";
-                req.ContentType = "application/json;charset=UTF-8";
-                req.ContentLength = buffer.Length;
+                req.ContentType = "application/json";
+                req.ContentLength = senLen;
                 Stream reqStream = req.GetRequestStream();
-                reqStream.Write(buffer, 0, buffer.Length);
+                reqStream.Write(buffer, 0, senLen);
                 reqStream.Close();
 
-                /*HttpWebResponse rsp = (HttpWebResponse)req.GetResponse();
+                HttpWebResponse rsp = (HttpWebResponse)req.GetResponse();
                 Stream rspStream = rsp.GetResponseStream();
                 StreamReader reader = new StreamReader(rspStream, Encoding.Default);
                 //响应消息直接抛弃
-                reader.ReadToEnd();
+                string resultFromRemote = reader.ReadToEnd();
+                //Console.WriteLine(resultFromRemote);
                 rsp.Close();
-                rspStream.Close();*/
+                rspStream.Close();
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.GetType().ToString()+e.Message+e.StackTrace);
+                //MessageBox.Show(e.GetType().ToString()+e.Message+e.StackTrace);
                 tmp = false;
             }
 
@@ -276,35 +265,69 @@ namespace uhf_test2
             gen.resetJson();
             gen.startJson();
 
-            gen.addString("task", taskId);
-
-            gen.startArray("rfids");
             foreach (EPC epc in rfids)
             {
-                gen.addStringToArray(epc.id);
+                gen.addStringToArray(epc.id.Substring(4, epc.id.Length-4));
             }
-            gen.endArray();
-            gen.addNum("seq", 1);
             gen.endJson();
-            return gen.toJson();
+            char[] tt = gen.toJson().ToCharArray();
+            tt[0] = '[';
+            tt[tt.Length-2] = ']';
+            return new string(tt);
         }
 
         #endregion
 
         private void taskFinish_Click(object sender, EventArgs e)
         {
+            if (taskStop(this.taskID) != "success")
+            {
+                MessageBox.Show("网络错误!");
+                return;
+            }
+            taskHide(true);
+        }
+        public void taskHide(bool isFinish)
+        {
             this.Hide();
             //显示父窗口
-            this.parent.Show();
+            TaskList tl = (TaskList)this.parent;
+            tl.returnFromTaskShow(isFinish);
         }
-
         public void taskShow(string taskID)
         {
             //隐藏父窗口
             this.parent.Hide();
+            listViewDetail.Items.Clear();//清空列表
             this.taskID = taskID;
             this.Show();
         }
 
+        private string taskStop(string pk)
+        {
+            string tmp = "";
+            HttpWebRequest req = null;
+            try
+            {
+                req = (HttpWebRequest)WebRequest.Create(HttpConfig.Instance.Host + "/inventory/" + pk + "/stop");
+
+                req.Method = "get";
+                HttpWebResponse rsp = (HttpWebResponse)req.GetResponse();
+                Stream rspStream = rsp.GetResponseStream();
+                StreamReader reader = new StreamReader(rspStream, Encoding.GetEncoding("utf-8"));
+                tmp = reader.ReadToEnd();
+                rspStream.Close();
+                rsp.Close();
+            }
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message+e.StackTrace);
+                tmp = "ERROR:1";
+            }
+
+            //关闭http请求
+            req.Abort();
+            return tmp;
+        }
     }
 }

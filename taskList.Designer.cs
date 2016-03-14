@@ -35,9 +35,9 @@
             // 
             this.taskListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.taskListView.FullRowSelect = true;
-            this.taskListView.Location = new System.Drawing.Point(13, 10);
+            this.taskListView.Location = new System.Drawing.Point(3, 10);
             this.taskListView.Name = "taskListView";
-            this.taskListView.Size = new System.Drawing.Size(185, 144);
+            this.taskListView.Size = new System.Drawing.Size(211, 144);
             this.taskListView.TabIndex = 0;
             this.taskListView.View = System.Windows.Forms.View.Details;
             this.taskListView.ItemActivate += new System.EventHandler(this.taskListView_ItemActivate);
@@ -50,6 +50,8 @@
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(217, 157);
             this.Controls.Add(this.taskListView);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "TaskList";
             this.Text = "任务列表";
             this.Load += new System.EventHandler(this.taskList_Load);

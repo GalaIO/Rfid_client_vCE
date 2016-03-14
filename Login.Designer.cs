@@ -78,15 +78,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(212, 193);
+            this.ClientSize = new System.Drawing.Size(204, 179);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.textPassword);
             this.Controls.Add(this.textUsername);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Login";
             this.Text = "登录窗口";
-            this.Load += new System.EventHandler(this.login_Load);
             this.ResumeLayout(false);
 
         }
