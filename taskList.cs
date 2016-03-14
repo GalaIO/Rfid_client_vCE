@@ -66,10 +66,6 @@ namespace Rfid_client_vCE
             } 
         }
 
-        private void taskListView_ItemActivate(object sender, EventArgs e)
-        {
-            //MessageBox.Show(taskListView.SelectedIndices.Count.ToString());
-        }
         private void taskListViewReload()
         {
             taskListView.Clear();
@@ -81,7 +77,7 @@ namespace Rfid_client_vCE
             for (int i = 0; i < Employee.taskList.Count; i++)
             {
                 ListViewItem item = new ListViewItem();
-                item.SubItems.Add(JsonParser.find(Employee.taskList[i], "pk", 0));
+                item.Text = JsonParser.find(Employee.taskList[i], "pk", 0);
                 item.SubItems.Add(JsonParser.find(Employee.taskList[i], "shelves", 0));
                 item.SubItems.Add(JsonParser.find(Employee.taskList[i], "task_type", 0));
                 item.SubItems.Add(JsonParser.find(Employee.taskList[i], "status", 0));

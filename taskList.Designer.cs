@@ -40,7 +40,6 @@
             this.taskListView.Size = new System.Drawing.Size(211, 144);
             this.taskListView.TabIndex = 0;
             this.taskListView.View = System.Windows.Forms.View.Details;
-            this.taskListView.ItemActivate += new System.EventHandler(this.taskListView_ItemActivate);
             this.taskListView.SelectedIndexChanged += new System.EventHandler(this.taskListView_SelectedIndexChanged);
             // 
             // TaskList
