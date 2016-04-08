@@ -1,0 +1,9 @@
+C:\Users\GalaIO\Desktop\GalaIO\Rfid_client_vWin\Rfid_client_vWin\Rfid_client_vWin\obj\x86\Debug\Rfid_client_vWin.Login.resources
+C:\Users\GalaIO\Desktop\GalaIO\Rfid_client_vWin\Rfid_client_vWin\Rfid_client_vWin\obj\x86\Debug\Rfid_client_vWin.Properties.Resources.resources
+C:\Users\GalaIO\Desktop\GalaIO\Rfid_client_vWin\Rfid_client_vWin\Rfid_client_vWin\obj\x86\Debug\Rfid_client_vWin.TaskForm.resources
+C:\Users\GalaIO\Desktop\GalaIO\Rfid_client_vWin\Rfid_client_vWin\Rfid_client_vWin\obj\x86\Debug\Rfid_client_vWin.csproj.GenerateResource.Cache
+C:\Users\GalaIO\Desktop\GalaIO\Rfid_client_vWin\Rfid_client_vWin\Rfid_client_vWin\bin\Debug\Rfid_client_vWin.exe
+C:\Users\GalaIO\Desktop\GalaIO\Rfid_client_vWin\Rfid_client_vWin\Rfid_client_vWin\bin\Debug\Rfid_client_vWin.pdb
+C:\Users\GalaIO\Desktop\GalaIO\Rfid_client_vWin\Rfid_client_vWin\Rfid_client_vWin\obj\x86\Debug\Rfid_client_vWin.exe
+C:\Users\GalaIO\Desktop\GalaIO\Rfid_client_vWin\Rfid_client_vWin\Rfid_client_vWin\obj\x86\Debug\Rfid_client_vWin.pdb
+C:\Users\GalaIO\Desktop\GalaIO\Rfid_client_vWin\Rfid_client_vWin\Rfid_client_vWin\obj\x86\Debug\Rfid_client_vWin.csprojResolveAssemblyReference.cache
